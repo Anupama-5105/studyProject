@@ -6,6 +6,40 @@ class AlertPage extends StatefulWidget {
 }
 
 class _AlertPageState extends State<AlertPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Alert Pop-Up'),
+        ),
+        body: Builder(builder: (context) {
+          return Container(
+            child: Center(
+              child: RaisedButton(
+                padding: EdgeInsets.all(20.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                color: Colors.redAccent[400],
+                textColor: Colors.white,
+                onPressed: () {
+                  createAlertDialog(context).then((onValue) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("dd"),));
+                  });
+                },
+                child: Text(
+                  'Alert !!',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+          );
+        }));
+  }
+
+
+
   createAlertDialog(BuildContext context) {
     TextEditingController mycontroller = TextEditingController();
 
@@ -31,38 +65,5 @@ class _AlertPageState extends State<AlertPage> {
         });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Alert Pop-Up'),
-        ),
-        body: Builder(builder: (context) {
-          return Container(
-            child: Center(
-              child: RaisedButton(
-                padding: EdgeInsets.all(20.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                color: Colors.redAccent[400],
-                textColor: Colors.white,
-                onPressed: () {
-                  createAlertDialog(context).then((onValue) {
-                    SnackBar mySnackBar =
-                        SnackBar(content: Text('Hello $onValue'),
-                          duration: Duration(seconds: 2),
-                        );
-                    Scaffold.of(context).showSnackBar(mySnackBar);
-                  });
-                },
-                child: Text(
-                  'Alert !!',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-          );
-        }));
-  }
+
 }
